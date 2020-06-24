@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CardsList from './components/CardsList';
+import SearchBox from './components/SearchBox';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    robos: [],
+    searchText: '',
+  };
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((res) => res.json())
+      .then((users) => this.setState({ robos: users }));
+  }
+
+  render() {
+    const handleChange = this.state.robos.filter((robo) =>
+      robo.name.toLowerCase().includes(this.state.searchText.toLowerCase())
+    );
+    return (
+      <div>
+        <CardsList robos={handleChange}>
+          <h1 className="display-2 text-info">Robo Search</h1>
+          <SearchBox
+            placeholder="Search Roboz"
+            handleChange={(e) => this.setState({ searchText: e.target.value })}
+            value={this.state.searchText}
+          />
+        </CardsList>
+      </div>
+    );
+  }
 }
 
 export default App;

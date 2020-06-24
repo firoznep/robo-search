@@ -1,0 +1,18 @@
+.card-style {
+  width: 300px;
+  cursor: pointer;
+  transition: all.5s;
+  -webkit-transition: all.5s;
+  -moz-transition: all.5s;
+  -ms-transition: all.5s;
+  -o-transition: all.5s;
+}
+.card-style:hover {
+  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
+  -moz-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  -o-transform: scale(1.03);
+
+  box-shadow: 0 0 10px 5px rgb(71, 71, 71);
+}
